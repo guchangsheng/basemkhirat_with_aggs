@@ -14,6 +14,7 @@ use Basemkhirat\Elasticsearch\Collection;
 class Query
 {
 
+    public static  $aggregations;     //扩展
     /**
      * Native elasticsearch connection instance
      * @var Connection
@@ -184,6 +185,10 @@ class Query
         return $this;
     }
 
+
+    public function getAgg(){
+        return self::$aggregations;
+    }
     /**
      * Get the index name
      * @return mixed
@@ -929,6 +934,8 @@ class Query
 
             $new[] = $model;
         }
+
+        self::$aggregations=$result['aggregations'];  //扩展
 
         $new = new Collection($new);
 
