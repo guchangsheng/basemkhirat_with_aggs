@@ -1,5 +1,5 @@
 {
-    "name": "basemkhirat/elasticsearch_with_aggs",
+    "name": "basemkhirat_with_aggs/elasticsearch",
     "description": "Laravel, Lumen and Native php elasticseach query builder to build complex queries using an elegant syntax",
     "keywords": [
         "elasticsearch",
@@ -20,13 +20,13 @@
     },
     "authors": [
         {
-            "name": "basemkhirat",
-            "email": "basemkhirat@gmail.com"
+            "name": "guchangsheng",
+            "email": "281759286@qq.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Basemkhirat_with\\Elasticsearch\\": "src/"
+            "Basemkhirat\\Elasticsearch\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -34,7 +34,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Basemkhirat_with\\Elasticsearch\\Tests\\": "tests/"
+            "Basemkhirat\\Elasticsearch\\Tests\\": "tests/"
         }
     },
     "require": {
@@ -50,10 +50,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Basemkhirat_with\\Elasticsearch\\ElasticsearchServiceProvider"
+                "Basemkhirat\\Elasticsearch\\ElasticsearchServiceProvider"
             ],
             "aliases": {
-                "ES": "Basemkhirat_with\\Elasticsearch\\Facades\\ES"
+                "ES": "Basemkhirat\\Elasticsearch\\Facades\\ES"
             }
         }
     }
