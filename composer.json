@@ -26,7 +26,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Basemkhirat\\Elasticsearch\\": "src/"
+            "Basemkhirat_with\\Elasticsearch\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -34,7 +34,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Basemkhirat\\Elasticsearch\\Tests\\": "tests/"
+            "Basemkhirat_with\\Elasticsearch\\Tests\\": "tests/"
         }
     },
     "require": {
@@ -50,10 +50,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Basemkhirat\\Elasticsearch\\ElasticsearchServiceProvider"
+                "Basemkhirat_with\\Elasticsearch\\ElasticsearchServiceProvider"
             ],
             "aliases": {
-                "ES": "Basemkhirat\\Elasticsearch\\Facades\\ES"
+                "ES": "Basemkhirat_with\\Elasticsearch\\Facades\\ES"
             }
         }
     }
