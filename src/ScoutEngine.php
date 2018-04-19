@@ -52,7 +52,7 @@ class ScoutEngine extends Engine
             ];
 
         });
-
+        $params['refresh']=true;
         $this->elastic->bulk($params);
     }
 
@@ -75,7 +75,7 @@ class ScoutEngine extends Engine
                 ]
             ];
         });
-
+        $params['refresh']=true;
         $this->elastic->bulk($params);
     }
 
