@@ -75,7 +75,8 @@ class ScoutEngine extends Engine
                 ]
             ];
         });
-        $params['refresh']=true;
+        $params['refresh']=true;///
+
         $this->elastic->bulk($params);
     }
 
