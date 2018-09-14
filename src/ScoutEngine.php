@@ -6,7 +6,8 @@ use Laravel\Scout\Builder;
 use Laravel\Scout\Engines\Engine;
 use Elasticsearch\Client as Elastic;
 use Illuminate\Database\Eloquent\Collection;
-
+use Mockery\Exception;
+use Elasticsearch\Common\Exceptions\BadRequest400Exception;
 class ScoutEngine extends Engine
 {
 
@@ -50,10 +51,13 @@ class ScoutEngine extends Engine
                 'doc' => $model->toSearchableArray(),
                 'doc_as_upsert' => true
             ];
-
         });
+
         $params['refresh']=true;
-        $this->elastic->bulk($params);
+        $res = $this->elastic->bulk($params);
+        if(isset($res['errors'])&&$res['errors']){
+            throw new BadRequest400Exception(json_encode($res["items"]));
+        }
     }
 
     /**
