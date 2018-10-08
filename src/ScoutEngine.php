@@ -47,8 +47,24 @@ class ScoutEngine extends Engine
                 ]
             ];
 
+            $convert = $model->toSearchableArray();
+
+            //es不支持逗号，转为冒号
+            if($model->searchableAs()=='assets'){
+                if (isset($convert['sort_str'])){
+                    if(!in_array($convert['sort_str'], ['null','NaN',""])){
+                        $convert['sort_str'] = $this->convertCategoryId($convert['sort_str']);
+                        $convert['single_sort_str'] = $this->getCategoryId($convert['sort_str']);
+                    }
+                }
+                if (isset($convert['view_sort_str'])){
+                    if(!in_array($convert['view_sort_str'], ['null','NaN',""])){
+                        $convert['view_sort_str'] = $this->convertCategoryId($convert['view_sort_str']);
+                    }
+                }
+            }
             $params['body'][] = [
-                'doc' => $model->toSearchableArray(),
+                'doc' => $convert,
                 'doc_as_upsert' => true
             ];
         });
@@ -60,6 +76,33 @@ class ScoutEngine extends Engine
         }
     }
 
+    //将提交的分类ID转换为可精确匹配的分类格式
+    public function convertCategoryId($resourceCategoryId){
+
+        $resourceCategoryId = str_replace([':','；'],';',$resourceCategoryId);
+        $resourceCategoryId = explode(';',$resourceCategoryId);
+        $newCategory = "";
+        foreach ($resourceCategoryId as $k =>$v){
+            $newCategory.=','.$v.','.';';
+        }
+        $newCategory = str_replace(',',':',$newCategory);
+        return rtrim($newCategory,';');
+
+    }
+
+
+    public function getCategoryId($categoryIds){
+        $cidArr = explode(';', $categoryIds);
+        $singleStr = "";
+
+        foreach ($cidArr as $k => $v) {
+            if(count(array_filter(explode(':',$v)))==1){
+                $singleStr.= $v.';';
+            }
+        }
+
+        return rtrim($singleStr,';');
+    }
     /**
      * Remove the given model from the index.
      * @param  Collection  $models
