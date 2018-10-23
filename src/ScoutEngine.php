@@ -8,6 +8,7 @@ use Elasticsearch\Client as Elastic;
 use Illuminate\Database\Eloquent\Collection;
 use Mockery\Exception;
 use Elasticsearch\Common\Exceptions\BadRequest400Exception;
+use Log;
 class ScoutEngine extends Engine
 {
 
@@ -72,7 +73,7 @@ class ScoutEngine extends Engine
         $params['refresh']=true;
         $res = $this->elastic->bulk($params);
         if(isset($res['errors'])&&$res['errors']){
-            throw new BadRequest400Exception(json_encode($res["items"]));
+           Log:Info(json_encode($res["items"]));
         }
     }
 
