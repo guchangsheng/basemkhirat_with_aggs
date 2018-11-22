@@ -40,7 +40,9 @@ class ScoutEngine extends Engine
 
         $models->each(function($model) use (&$params)
         {
+
             $params['body'][] = [
+
                 'update' => [
                     '_id' => $model->getKey(),
                     '_index' => $this->index,
@@ -72,9 +74,11 @@ class ScoutEngine extends Engine
 
         $params['refresh']=true;
         $res = $this->elastic->bulk($params);
+
         if(isset($res['errors'])&&$res['errors']){
-           Log:Info(json_encode($res["items"]));
+           #Log::Info(json_encode($res["items"]));
         }
+
     }
 
     //将提交的分类ID转换为可精确匹配的分类格式
