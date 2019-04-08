@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Mockery\Exception;
 use Elasticsearch\Common\Exceptions\BadRequest400Exception;
 use Log;
+
 class ScoutEngine extends Engine
 {
 
@@ -45,7 +46,7 @@ class ScoutEngine extends Engine
 
                 'update' => [
                     '_id' => $model->getKey(),
-                    '_index' => $this->index,
+                    '_index' => $model->indexAs(),
                     '_type' => $model->searchableAs(),
                 ]
             ];
@@ -82,7 +83,8 @@ class ScoutEngine extends Engine
     }
 
     //将提交的分类ID转换为可精确匹配的分类格式
-    public function convertCategoryId($resourceCategoryId){
+    public function convertCategoryId($resourceCategoryId)
+    {
 
         $resourceCategoryId = str_replace([':','；'],';',$resourceCategoryId);
         $resourceCategoryId = explode(';',$resourceCategoryId);
