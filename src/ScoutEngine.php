@@ -54,7 +54,7 @@ class ScoutEngine extends Engine
             $convert = $model->toSearchableArray();
 
             //es不支持逗号，转为冒号
-            if($model->searchableAs()=='assets'){
+            if($model->searchableAs()=='assets'||$model->searchableAs()=='res_group_assets'){
                 if (isset($convert['sort_str'])){
                     if(!in_array($convert['sort_str'], ['null','NaN',""])){
                         $convert['sort_str'] = $this->convertCategoryId($convert['sort_str']);
@@ -77,7 +77,7 @@ class ScoutEngine extends Engine
         $res = $this->elastic->bulk($params);
 
         if(isset($res['errors'])&&$res['errors']){
-           #Log::Info(json_encode($res["items"]));
+            #Log::Info(json_encode($res["items"]));
         }
 
     }
