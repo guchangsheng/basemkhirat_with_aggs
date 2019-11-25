@@ -54,7 +54,7 @@ class ScoutEngine extends Engine
             $convert = $model->toSearchableArray();
 
             //es不支持逗号，转为冒号
-            if($model->searchableAs()=='assets'||$model->searchableAs()=='res_group_assets'){
+          /*  if($model->searchableAs()=='assets'||$model->searchableAs()=='res_group_assets'){
                 if (isset($convert['sort_str'])){
                     if(!in_array($convert['sort_str'], ['null','NaN',""])){
                         $convert['sort_str'] = $this->convertCategoryId($convert['sort_str']);
@@ -66,7 +66,7 @@ class ScoutEngine extends Engine
                         $convert['view_sort_str'] = $this->convertCategoryId($convert['view_sort_str']);
                     }
                 }
-            }
+            }*/
             $params['body'][] = [
                 'doc' => $convert,
                 'doc_as_upsert' => true
